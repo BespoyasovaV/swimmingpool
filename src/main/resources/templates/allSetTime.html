@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список по выбранной дате</title>
+    <style>
+        #centered {
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h3>Список клиентов по выбранной дате</h3>
+<div id="centered">
+<form action="/api/v0/pool/timetable/all" method="post">
+    <div th:each="el : ${itog}" class="alert alert-info mt-2">
+        <div >
+            <h3 th:text="${el.date}"/>
+            <h3 th:text="${el.time}"/>
+            <a th:href="'/api/v0/pool/client/'+${el.timeId}+'/delete'" class="btn btn-warning">Удалить</a>
+        </div>
+    </div>
+    <a class="btn btn-warning" href="/api/v0/pool/client/all"> Все клиенты</a>
+    <a class="btn btn-warning" href="reserve"> Назад</a>
+
+</form>
+</div>
+</body>
+</html>

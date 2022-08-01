@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #centered {
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h3> Полный список клиентов</h3>
+<form action="/api/v0/pool/timetable/reserve">
+    <button type="submit">Добавить запись</button>
+</form>
+<br><br>
+<div th:each="el : ${clients}" class="alert alert-info mt-2">
+    <div id="centered">
+        <h3 th:text="${el.name}"/>
+        <h3 th:text="${el.tel}"/>
+        <h3 th:text="${el.email}"/>
+        <a th:href="'/api/v0/pool/client/'+${el.clientId}+'/update'" class="btn btn-warning">Детальнее</a>
+    </div>
+    <br><br>
+</div>
+
+</body>
+</html>
