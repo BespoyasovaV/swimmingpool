@@ -26,7 +26,7 @@ public class TimeService {
             }
         }
 
-        if (s>=10){
+        if (s>=9){
             return false;
         }
         else return true;

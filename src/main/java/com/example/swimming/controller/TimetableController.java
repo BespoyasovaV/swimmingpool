@@ -51,7 +51,7 @@ public class TimetableController {
         timetable.setClients(client1);
         if (timeService.flag(date1, time)) {
             timetableRepository.save(timetable);
-            return "timetable";
+            return "redirect:/api/v0/pool/timetable/reserve";
         } else return "errortime";
     }
 
@@ -73,13 +73,20 @@ public class TimetableController {
                 for (Timetable timetable : sortTime) {
                     Client[] arr = timetable.getClients().toArray(new Client[0]);
                     int next = Integer.parseInt(timetable.getTime()) + 1;
-                    String foi = timetable.getTime() + " " + arr[0].getName();
-                    timetable.setTime(foi);
+                    String foi = timetable.getTime();
+                    try {
+                        timetable.setDate(dateFormat.parse(datee));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    int time=Integer.parseInt(foi)+1;
+                    timetable.setTime(foi+":00-"+time+":00"  + " " + arr[0].getName());
                     itog.add(timetable);
                 }
             }
             if (itog.size() != 0) {
                 model.addAttribute("itog", itog);
+                model.addAttribute("date" , datee);
             }
             return "allSetTime";
         } else return "allSetTime";
