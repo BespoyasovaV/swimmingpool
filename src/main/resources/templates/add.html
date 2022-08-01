@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление клиентов</title>
+    <style>
+        div.centered {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 200px;
+            height: 200px;
+            width: 270px;
+            border: 2px solid blue;
+        }
+
+        input {
+            width: 250px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="centered">
+    <form action="/api/v0/pool/client/add" method="post">
+        <input type="text" name="name" placeholder="Введите ФИО" class="form-control"> <br>
+        <input type="text" name="tel" placeholder="Введите телефон" class="form-control"> <br>
+        <input type="text" name="email" placeholder="Введите email" class="form-control"> <br>
+        <button type="submit" class="button-success">Добавить</button>
+        <a class="btn btn-warning" href="/api/v0/pool/client/all"> Все клиенты</a>
+    </form>
+</div>
+
+</body>
+</html>

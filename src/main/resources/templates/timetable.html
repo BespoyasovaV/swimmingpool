@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+    <script src="dist/js/datepicker.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Расписание</title>
+    <script>
+
+    </script>
+    <style>
+        #centered {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 200px;
+            height: 400px;
+            width: 270px;
+            border: 2px solid black;
+    }</style>
+</head>
+<body>
+<form method="post">
+    <div id="centered">
+    <h3>Выберите дату:</h3>
+    <input name="date" id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/>
+    <script>
+        const picker = document.getElementById('date1');
+        picker.addEventListener('input', function (e) {
+            var day = new Date(this.value).getUTCDay();
+            if ([6, 0].includes(day)) {
+                e.preventDefault();
+                this.value = '';
+                alert('Weekends not allowed');
+            }
+        });</script>
+    <h3>Выберите время:</h3>
+    <p><select name="time" autofocus>
+        <option>Выберите из списка</option>
+        <option value="9">9:00-10:00</option>
+        <option value="10">10:00-11:00</option>
+        <option value="11">11:00-12:00</option>
+        <option value="12">12:00-13:00</option>
+        <option value="13">13:00-14:00</option>
+    </select></p>
+
+    <h3>Выберите клиента:</h3>
+    <p><select name="client" autofocus>
+        <div th:each="el : ${client}">
+            <option th:value="${el.clientId}" th:text="${el.name}">
+        </div>
+    </select></p>
+
+    <button type="submit" class="button-success">Записать</button>
+
+</form>
+<br><br>
+<form action="/api/v0/pool/timetable/all">
+    <input name="datee" id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/>
+    <script>
+        const picker = document.getElementById('date1');
+        picker.addEventListener('input', function (e) {
+            var day = new Date(this.value).getUTCDay();
+            if ([6, 0].includes(day)) {
+                e.preventDefault();
+                this.value = '';
+                alert('Weekends not allowed');
+            }
+        });</script>
+    <button type="submit">Занятые записи</button>
+    <br><br>
+</form>
+</form><form action="/api/v0/pool/timetable/available">
+    <input name="datee" id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/>
+    <script>
+        const picker = document.getElementById('date1');
+        picker.addEventListener('input', function (e) {
+            var day = new Date(this.value).getUTCDay();
+            if ([6, 0].includes(day)) {
+                e.preventDefault();
+                this.value = '';
+                alert('Weekends not allowed');
+            }
+        });</script>
+    <button type="submit">Доступные записи</button>
+</form>
+    </div>
+
+
+
+</body>
+</html>

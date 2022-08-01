@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать запись о клиенте</title>
+    <style>
+        div.centered {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 200px;
+            height: 200px;
+            width: 270px;
+            border: 2px solid blue;
+        }
+        input {
+            width: 250px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="centered" th:each="el : ${client}">
+    <form method="post">
+        <input type="text" th:value="${el.name}" name="name" placeholder="Введите ФИО" class="form-control"> <br>
+        <input type="text" th:value="${el.tel}"  name="tel" placeholder="Введите телефон" class="form-control"> <br>
+        <input type="text" th:value="${el.email}"  name="email" placeholder="Введите email" class="form-control"> <br>
+        <button>Обновить</button>
+    </form>
+</div>
+</body>
+</html>
