@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h3{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<h2 th:text="'Доступные записи на дату: ' + ${date} " >
+</h2>
+<div th:each="el : ${sort}" class="alert alert-info mt-2">
+    <div id="centered">
+        <h3 th:text="${el}"/>
+    </div>
+    <br><br>
+</div>
+<a class="btn btn-warning" href=" reserve"> Назад</a>
+</body>
+</html>

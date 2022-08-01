@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все записи</title>
+</head>
+<body>
+<h3> Выберите дату</h3>
+<input name="date" id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/>
+<script>
+    const picker = document.getElementById('date1');
+    picker.addEventListener('input', function (e) {
+        var day = new Date(this.value).getUTCDay();
+        if ([6, 0].includes(day)) {
+            e.preventDefault();
+            this.value = '';
+            alert('Weekends not allowed');
+        }
+    });</script>
+
+
+    <br><br>
+<form action="/api/v0/pool/timetable/allTime" method="post">
+    <button type="submit">Все записи</button>
+</form>
+
+</body>
+</html>
