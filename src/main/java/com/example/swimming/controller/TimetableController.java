@@ -73,6 +73,7 @@ public class TimetableController {
                 for (Timetable timetable : sortTime) {
                     Client[] arr = timetable.getClients().toArray(new Client[0]);
                     int next = Integer.parseInt(timetable.getTime()) + 1;
+<<<<<<< HEAD
                     String foi = timetable.getTime();
                     try {
                         timetable.setDate(dateFormat.parse(datee));
@@ -81,12 +82,19 @@ public class TimetableController {
                     }
                     int time=Integer.parseInt(foi)+1;
                     timetable.setTime(foi+":00-"+time+":00"  + " " + arr[0].getName());
+=======
+                    String foi = timetable.getTime() + " " + arr[0].getName();
+                    timetable.setTime(foi);
+>>>>>>> origin/master
                     itog.add(timetable);
                 }
             }
             if (itog.size() != 0) {
                 model.addAttribute("itog", itog);
+<<<<<<< HEAD
                 model.addAttribute("date" , datee);
+=======
+>>>>>>> origin/master
             }
             return "allSetTime";
         } else return "allSetTime";
