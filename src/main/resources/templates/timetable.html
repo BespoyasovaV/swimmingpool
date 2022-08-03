@@ -17,45 +17,68 @@
             height: 400px;
             width: 270px;
             border: 2px solid black;
-    }</style>
+        }</style>
 </head>
 <body>
-<form method="post">
-    <div id="centered">
-    <h3>Выберите дату:</h3>
-    <input name="date" id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/>
-    <script>
-        const picker = document.getElementById('date1');
-        picker.addEventListener('input', function (e) {
-            var day = new Date(this.value).getUTCDay();
-            if ([6, 0].includes(day)) {
-                e.preventDefault();
-                this.value = '';
-                alert('Weekends not allowed');
-            }
-        });</script>
-    <h3>Выберите время:</h3>
-    <p><select name="time" autofocus>
-        <option>Выберите из списка</option>
-        <option value="9">9:00-10:00</option>
-        <option value="10">10:00-11:00</option>
-        <option value="11">11:00-12:00</option>
-        <option value="12">12:00-13:00</option>
-        <option value="13">13:00-14:00</option>
-    </select></p>
+<script type="text/javascript">
+    function validateForm() {
+        var a = document.forms["Form"]["date"].value;
+        var b = document.forms["Form"]["time"].value;
+        var c = document.forms["Form"]["client"].value;
 
-    <h3>Выберите клиента:</h3>
-    <p><select name="client" autofocus>
-        <div th:each="el : ${client}">
-            <option th:value="${el.clientId}" th:text="${el.name}">
-        </div>
-    </select></p>
+        if (a == null || a == "" || b == null || b == "" || c == null || c == "") {
+            alert("Пожалуйста, заполните все поля");
+            return false;
+        }
+    }
+</script>
+<div id="centered">
+<form name="Form" method="post" onsubmit="return validateForm()">
 
-    <button type="submit" class="button-success">Записать</button>
+        <h3>Выберите дату:</h3>
+        <input name="date" id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/>
+        <script>
+            const picker = document.getElementById('date1');
+            picker.addEventListener('input', function (e) {
+                var day = new Date(this.value).getUTCDay();
+                if ([6, 0].includes(day)) {
+                    e.preventDefault();
+                    this.value = '';
+                    alert('Weekends not allowed');
+                }
+            });</script>
+        <h3>Выберите время:</h3>
+        <p><select name="time" autofocus>
+            <option>Выберите из списка</option>
+            <option value="9">9:00-10:00</option>
+            <option value="10">10:00-11:00</option>
+            <option value="11">11:00-12:00</option>
+            <option value="12">12:00-13:00</option>
+            <option value="13">13:00-14:00</option>
+        </select></p>
+
+        <h3>Выберите клиента:</h3>
+        <p><select name="client" autofocus>
+            <div th:each="el : ${client}">
+                <option th:value="${el.clientId}" th:text="${el.name}">
+            </div>
+        </select></p>
+
+        <button type="submit" class="button-success">Записать</button>
 
 </form>
 <br><br>
-<form action="/api/v0/pool/timetable/all">
+<script type="text/javascript">
+    function reservedvalidateForm() {
+        var a = document.forms["Reserved"]["datee"].value;
+
+        if (a == null || a == "") {
+            alert("Пожалуйста, заполните поле занятых записей");
+            return false;
+        }
+    }
+</script>
+<form name="Reserved" action="/api/v0/pool/timetable/all" onsubmit="return reservedvalidateForm()">
     <input name="datee" id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/>
     <script>
         const picker = document.getElementById('date1');
@@ -64,13 +87,24 @@
             if ([6, 0].includes(day)) {
                 e.preventDefault();
                 this.value = '';
-                alert('Weekends not allowed');
+                alert("Это выходной");
             }
         });</script>
     <button type="submit">Занятые записи</button>
     <br><br>
 </form>
-</form><form action="/api/v0/pool/timetable/available">
+</form>
+<script type="text/javascript">
+    function dostupnovalidateForm() {
+        var a = document.forms["Dostupno"]["datee"].value;
+
+        if (a == null || a == "") {
+            alert("Пожалуйста, заполните поле доступной записи");
+            return false;
+        }
+    }
+</script>
+<form name="Dostupno" action="/api/v0/pool/timetable/available" onsubmit="return dostupnovalidateForm()">
     <input name="datee" id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/>
     <script>
         const picker = document.getElementById('date1');
@@ -84,9 +118,7 @@
         });</script>
     <button type="submit">Доступные записи</button>
 </form>
-    </div>
-
-
+</div>
 
 </body>
 </html>

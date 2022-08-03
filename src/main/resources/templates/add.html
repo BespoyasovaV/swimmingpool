@@ -28,7 +28,19 @@
 </head>
 <body>
 <div class="centered">
-    <form action="/api/v0/pool/client/add" method="post">
+    <script type="text/javascript">
+        function validateForm() {
+            var a = document.forms["Form"]["name"].value;
+            var b = document.forms["Form"]["tel"].value;
+            var c = document.forms["Form"]["email"].value;
+
+            if (a == null || a == "" || b == null || b == "" || c == null || c == "") {
+                alert("Пожалуйста, заполните все поля");
+                return false;
+            }
+        }
+    </script>
+    <form name="Form" action="/api/v0/pool/client/add" method="post" onsubmit="return validateForm()">
         <input type="text" name="name" placeholder="Введите ФИО" class="form-control"> <br>
         <input type="text" name="tel" placeholder="Введите телефон" class="form-control"> <br>
         <input type="text" name="email" placeholder="Введите email" class="form-control"> <br>
