@@ -28,7 +28,19 @@
 <body>
 
 <div class="centered" th:each="el : ${client}">
-    <form method="post">
+    <script type="text/javascript">
+        function validateForm() {
+            var a = document.forms["Form"]["name"].value;
+            var b = document.forms["Form"]["tel"].value;
+            var c = document.forms["Form"]["email"].value;
+
+            if (a == null || a == "" || b == null || b == "" || c == null || c == "") {
+                alert("Пожалуйста, заполните все поля");
+                return false;
+            }
+        }
+    </script>
+    <form name="Form" method="post" onsubmit="return validateForm()">
         <input type="text" th:value="${el.name}" name="name" placeholder="Введите ФИО" class="form-control"> <br>
         <input type="text" th:value="${el.tel}"  name="tel" placeholder="Введите телефон" class="form-control"> <br>
         <input type="text" th:value="${el.email}"  name="email" placeholder="Введите email" class="form-control"> <br>
